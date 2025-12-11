@@ -1,20 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import OpenAI from "openai";
+
 import { PresenceStep, SessionState } from "@/lib/types";
+
 import { getSessionState, saveSessionState } from "@/lib/sessionStore";
+
 import { buildPromptForStep } from "@/lib/promptBuilder";
+
 import { checkForSafetyFlags } from "@/lib/safety";
 
+let openai: OpenAI | null = null;
+
 /**
- * Initialize the OpenAI client.
+
+ * Lazily initialize the OpenAI client.
+
  *
- * Make sure you set OPENAI_API_KEY in your environment:
- * - For local development, add it to `.env.local`
- * - In production, configure it in your hosting provider's environment settings
+
+ * This avoids throwing at module import time when OPENAI_API_KEY is missing,
+ * and instead defers the error handling to request time.
  */
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+function getOpenAIClient(): OpenAI {
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error(
+      "Server is not configured with an OpenAI API key. Please set OPENAI_API_KEY.",
+    );
+  }
+
+  if (!openai) {
+    openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+
+  return openai;
+}
 
 interface ChatRequestBody {
   sessionId: string;
@@ -50,12 +71,14 @@ export async function POST(
   req: NextRequest,
 ): Promise<NextResponse<ChatResponseBody | { error: string }>> {
   // Basic environment guard
+
   if (!process.env.OPENAI_API_KEY) {
     return NextResponse.json(
       {
         error:
           "Server is not configured with an OpenAI API key. Please set OPENAI_API_KEY.",
       },
+
       { status: 500 },
     );
   }
@@ -152,7 +175,9 @@ export async function POST(
 
      */
 
-    const completion = await openai.chat.completions.create({
+    const client = getOpenAIClient();
+
+    const completion = await client.chat.completions.create({
       model: "gpt-4o",
       messages: [
         {
