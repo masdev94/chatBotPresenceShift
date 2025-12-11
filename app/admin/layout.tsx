@@ -25,7 +25,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           content="width=device-width, initial-scale=1, maximum-scale=5"
         />
       </head>
-      <body className="bg-slate-50 text-slate-900 antialiased">
+      <body className=" text-slate-900 antialiased">
         <div className="w-full h-full">{children}</div>
       </body>
     </html>
