@@ -209,7 +209,7 @@ export async function createRitualConfigVersion(opts: {
       isActive: makeActive,
       label: label ?? null,
       notes: notes ?? null,
-      configJson: config,
+      configJson: config as unknown as Prisma.InputJsonValue,
       createdBy: createdBy ?? null,
     },
   });

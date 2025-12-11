@@ -166,6 +166,58 @@ npm run type-check
 | `ADMIN_SECRET` | Password for admin panel access | Yes |
 | `DATABASE_URL` | Database connection string (if using persistent storage) | No |
 
+## Deployment
+
+### Deploy to Vercel (Recommended)
+
+This project is optimized for deployment on Vercel. Follow these quick steps:
+
+1. **Push your code to GitHub/GitLab/Bitbucket**
+   ```bash
+   git add .
+   git commit -m "Ready for deployment"
+   git push origin main
+   ```
+
+2. **Import to Vercel**
+   - Go to [vercel.com/new](https://vercel.com/new)
+   - Import your repository
+   - Set Root Directory: `MVP/presence-shift-companion` (if applicable)
+   - Framework: Next.js (auto-detected)
+
+3. **Configure Environment Variables**
+   Add these in Vercel dashboard:
+   ```env
+   OPENAI_API_KEY=your_openai_api_key
+   ADMIN_SECRET=your_secure_admin_password
+   ```
+
+4. **Deploy**
+   - Click "Deploy"
+   - Wait 2-3 minutes
+   - Your site will be live at: `https://your-project.vercel.app`
+
+5. **Test Your Deployment**
+   - Visit `/shift` - Test the chat interface
+   - Visit `/admin` - Verify admin panel access
+
+**📚 For detailed deployment instructions, troubleshooting, and custom domain setup, see:**
+- [DEPLOYMENT.md](./DEPLOYMENT.md) - Complete deployment guide
+- [DEPLOY_QUICK_REFERENCE.md](./DEPLOY_QUICK_REFERENCE.md) - One-page quick reference
+
+### Automatic Updates
+
+Once deployed, Vercel automatically redeploys on every `git push` to your main branch:
+```bash
+git push origin main  # Triggers automatic deployment
+```
+
+### Environment Variables
+
+After deployment, you can update environment variables in:
+- Vercel Dashboard → Your Project → Settings → Environment Variables
+- Remember to redeploy after changing variables
+
 ## Troubleshooting
 
 ### Hydration Errors
@@ -176,6 +228,12 @@ The system uses GPT-4's JSON mode to ensure valid responses. If issues persist, 
 
 ### Session State Issues
 Clear the `.next` cache folder and restart the dev server if session data appears inconsistent.
+
+### Deployment Issues
+- **Build fails**: Run `npm run build` locally first to catch errors
+- **404 errors**: Verify Root Directory setting in Vercel
+- **API key errors**: Check environment variables are set in Vercel dashboard
+- **See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete troubleshooting guide**
 
 ## Security Considerations
 
@@ -191,6 +249,15 @@ Clear the `.next` cache folder and restart the dev server if session data appear
 ## Contributing
 
 Contributions are welcome! Please read our contributing guidelines before submitting pull requests.
+
+## Documentation
+
+- [README.md](./README.md) - This file, project overview
+- [QUICKSTART.md](./QUICKSTART.md) - 5-minute setup guide
+- [DEPLOYMENT.md](./DEPLOYMENT.md) - Complete Vercel deployment guide
+- [DEPLOY_QUICK_REFERENCE.md](./DEPLOY_QUICK_REFERENCE.md) - Quick deployment reference
+- [IMPROVEMENTS.md](./IMPROVEMENTS.md) - Technical improvements documentation
+- [DOCUMENTATION.md](./DOCUMENTATION.md) - Documentation hub
 
 ## Support
 
