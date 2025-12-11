@@ -253,7 +253,7 @@ export default function AdminPage() {
 
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-slate-700">
-                  Admin Secret
+                  Password
                 </label>
                 <input
                   type="password"
@@ -261,12 +261,9 @@ export default function AdminPage() {
                   onChange={(e) => setSecret(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && authenticate()}
                   className="w-full px-4 py-3 sm:py-3.5 border border-slate-300 rounded-lg text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Enter your admin secret"
+                  placeholder="Enter Password"
                   disabled={loading}
                 />
-                <p className="text-xs sm:text-sm text-slate-500">
-                  Configured in your .env.local file
-                </p>
               </div>
 
               <button
