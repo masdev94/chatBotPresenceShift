@@ -206,7 +206,7 @@ export default function AdminPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50 flex items-center justify-center p-4 sm:p-6">
+      <div className="h-full bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50 flex items-center justify-center p-4 sm:p-6">
         <div className="w-full max-w-md">
           <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-8 sm:px-8 sm:py-10 text-white">
@@ -310,7 +310,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div>
       {/* Header - Responsive */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
